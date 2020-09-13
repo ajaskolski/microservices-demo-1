@@ -1,31 +1,47 @@
 [![Build Status](https://travis-ci.org/microservices-demo/microservices-demo.svg?branch=master)](https://travis-ci.org/microservices-demo/microservices-demo)
 
-# Sock Shop : A Microservice Demo Application
 
-The application is the user-facing part of an online shop that sells socks. It is intended to aid the demonstration and testing of microservice and cloud native technologies.
+#Start
+First You need to download repos (both are public) ->
 
-It is built using [Spring Boot](http://projects.spring.io/spring-boot/), [Go kit](http://gokit.io) and [Node.js](https://nodejs.org/) and is packaged in Docker containers.
+### 1
+ [ajaskolski/microservices-demo-cypress](https://github.com/ajaskolski/microservices-demo-cypress)
+ I forked front end repository and push my own docker image to introduce cypress to
+ ajaskolski/front-end
+ to start just run docker containers:
+ 
+  `docker-compose -f deploy/docker-compose/docker-compose.yml up -d`
+  
+  after work just clean containers:
+  
+  `docker-compose -f deploy/docker-compose/docker-compose.yml down`
+### 2 
+  [ajaskolski/front-end](https://github.com/ajaskolski/front-end) 
+ All the sweets of cypress and new code can be found in this repo.
+ You can run cypress tests by 
+ 
+ `cypress run` 
+ 
+ or use gui 
+ 
+ `cypress open`
+  
 
-You can read more about the [application design](./internal-docs/design.md).
+#Summary
 
-## Deployment Platforms
+Added docker image of front-end service with cypress tests.
 
-The [deploy folder](./deploy/) contains scripts and instructions to provision the application onto your favourite platform. 
+To easier locate elements without id I mostly add custom data attributes in html.
+For modern projects in react/vue there should shared file beetween src code and test code for updated values of locators.
 
-Please let us know if there is a platform that you would like to see supported.
+Application got some bugs so I choose sample paths viable to automate.
 
-## Bugs, Feature Requests and Contributing
+Add whole configuration contains eslint, prettier and tsconfig.
 
-We'd love to see community contributions. We like to keep it simple and use Github issues to track bugs and feature requests and pull requests to manage contributions. See the [contribution information](.github/CONTRIBUTING.md) for more information.
+There is case using hardcoded data and case that creates its own user data and clean it afterwards with api methods.
 
-## Screenshot
+Showed one of possible approaches to the topic. Used piece of page object patern, add some custom method to cy, add plugin with faker to create data in test.
 
-![Sock Shop frontend](https://github.com/microservices-demo/microservices-demo.github.io/raw/master/assets/sockshop-frontend.png)
+Every push to front-end repository master branch will trigger update of docker image on dockerhub as latest tag.
 
-## Visualizing the application
-
-Use [Weave Scope](http://weave.works/products/weave-scope/) or [Weave Cloud](http://cloud.weave.works/) to visualize the application once it's running in the selected [target platform](./deploy/).
-
-![Sock Shop in Weave Scope](https://github.com/microservices-demo/microservices-demo.github.io/raw/master/assets/sockshop-scope.png)
-
-## 
+Next step would be adding database for clean DDT firebase/mysql, linking pushes to CI/CD, put some visual testing with Percy or any similiar.
